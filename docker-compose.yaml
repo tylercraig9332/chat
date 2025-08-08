@@ -1,0 +1,11 @@
+
+services:
+  chat-postgres:
+    image: postgres:latest
+    container_name: chat-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+    ports:
+      - "15432:5432"
+    restart: unless-stopped
