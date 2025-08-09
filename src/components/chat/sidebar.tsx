@@ -12,21 +12,25 @@ import {
   SidebarMenu,
 } from "@/components/ui/sidebar";
 import { Chat } from "@/lib/schema";
+import { cn } from "@/lib/utils";
 import { SquarePen } from "lucide-react";
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export function ChatSidebar({ chats }: { chats: Chat[] }) {
+  const pathname = usePathname();
+  const chatId = pathname.split("/").pop();
   return (
     <Sidebar>
       <SidebarHeader>
         <SidebarMenu>
-          <h1 className="text-2xl font-bold text-center">AI Chat</h1>
+          <h1 className="text-2xl font-bold text-center mt-2">AI Chat</h1>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarMenuButton asChild>
-            <Link href="/chat">
+            <Link href="/chat" className="">
               <SquarePen className="size-4" /> Create New Chat
             </Link>
           </SidebarMenuButton>
@@ -38,7 +42,12 @@ export function ChatSidebar({ chats }: { chats: Chat[] }) {
               {chats?.map((chat) => (
                 <SidebarMenuItem key={chat.id}>
                   <SidebarMenuButton asChild>
-                    <Link href={`/chat/${chat.id}`}>{chat.title}</Link>
+                    <Link
+                      href={`/chat/${chat.id}`}
+                      className={cn(chat.id === chatId && "bg-secondary")}
+                    >
+                      {chat.title}
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
