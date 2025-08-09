@@ -126,6 +126,12 @@ export const PromptInputTextarea = ({
     }
   };
 
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.focus();
+    }
+  }, [textareaRef]);
+
   return (
     <Textarea
       className={cn(

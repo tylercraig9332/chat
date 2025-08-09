@@ -44,7 +44,10 @@ export function ChatSidebar({ chats }: { chats: Chat[] }) {
                   <SidebarMenuButton asChild>
                     <Link
                       href={`/chat/${chat.id}`}
-                      className={cn(chat.id === chatId && "bg-secondary")}
+                      className={cn(
+                        chat.id === chatId && "bg-secondary",
+                        "truncate overflow-ellipsis w-64"
+                      )}
                     >
                       {chat.title}
                     </Link>
